@@ -29,6 +29,19 @@
         chart_ref: 'openldap'
         release_name: 'openldap'
         release_namespace: 'openldap'
+        release_values:
+          ltb-passwd:
+            ingress:
+              enabled: true
+              path: /
+              hosts:
+                - "password.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
+          phpldapadmin:
+            ingress:
+              enabled: true
+              path: /
+              hosts:
+                - "phpldapadmin.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
 
     - name: 'Wait until all pods in the openldap namespace are running'
       delegate_to: localhost
@@ -43,3 +56,29 @@
         pod_list | json_query("resources[*].status.phase") | unique | sort == ["Running", "Succeeded"]
       retries: 12
       delay: 10
+
+    - name: 'Wait for the phpldapadmin URL to be reachable'
+      ansible.builtin.uri:
+        url: "http://phpldapadmin.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
+      register: result
+      until: "result.status == 302 or result.status == 200"
+      retries: 11
+      delay: 10
+
+    - name: 'Wait for the password URL to be reachable'
+      ansible.builtin.uri:
+        url: "http://password.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
+      register: result
+      until: "result.status == 302 or result.status == 200"
+      retries: 11
+      delay: 10
+
+    - name: 'The password change self-service URL'
+      delegate_to: 'localhost'
+      ansible.builtin.debug:
+        msg: "The password change self-service is reachable here: http://password.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
+
+    - name: 'phpldapadmin URL'
+      delegate_to: 'localhost'
+      ansible.builtin.debug:
+        msg: "phpldapadmin is reachable here: http://phpldapadmin.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
