@@ -1,0 +1,45 @@
+---
+
+- name: 'Install OpenLDAP'
+  hosts: 'k3s1'
+  gather_facts: true
+  become: false
+  module_defaults:
+    kubernetes.core.helm:
+      kubeconfig: './k3s-kubeconfig'
+    kubernetes.core.k8s:
+      kubeconfig: './k3s-kubeconfig'
+    kubernetes.core.k8s_info:
+      kubeconfig: './k3s-kubeconfig'
+
+  tasks:
+
+    - name: 'Create the openldap namespace'
+      delegate_to: 'localhost'
+      kubernetes.core.k8s:
+        name: 'openldap'
+        api_version: 'v1'
+        kind: 'Namespace'
+        state: 'present'
+
+    - name: 'Install OpenLDAP using the Symas chart'
+      delegate_to: 'localhost'
+      kubernetes.core.helm:
+        chart_repo_url: 'https://symas.github.io/helm-openldap/'
+        chart_ref: 'openldap'
+        release_name: 'openldap'
+        release_namespace: 'openldap'
+
+    - name: 'Wait until all pods in the openldap namespace are running'
+      delegate_to: localhost
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        namespace: openldap
+      register: pod_list
+      until: |
+        pod_list | json_query("resources[*].status.phase") | unique | sort == ["Running"]
+        or
+        pod_list | json_query("resources[*].status.phase") | unique | sort == ["Running", "Succeeded"]
+      retries: 12
+      delay: 10
