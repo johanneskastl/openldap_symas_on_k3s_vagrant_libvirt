@@ -30,6 +30,10 @@
         release_name: 'openldap'
         release_namespace: 'openldap'
         release_values:
+          global:
+            ldapDomain: "DC=openldap,DC=example,DC=org"
+            adminPassword: "totallynotsecure"
+            configPassword: "anothertotallyinsecurepassword"
           ltb-passwd:
             ingress:
               enabled: true
