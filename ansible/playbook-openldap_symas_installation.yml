@@ -57,6 +57,44 @@
       retries: 12
       delay: 10
 
+    - name: 'Create an ingressrouteTCP for OpenLDAP'
+      delegate_to: 'localhost'
+      kubernetes.core.k8s:
+        state: 'present'
+        resource_definition: |
+          apiVersion: traefik.io/v1alpha1
+          kind: IngressRouteTCP
+          metadata:
+            name: openldap-tcp
+            namespace: openldap
+          spec:
+            entryPoints:
+              - ldap-tcp
+            routes:
+            - match: HostSNI(`*`)
+              services:
+              - name: openldap
+                port: 1389
+
+    - name: 'Create an ingressrouteUDP for OpenLDAP'
+      delegate_to: 'localhost'
+      kubernetes.core.k8s:
+        state: 'present'
+        resource_definition: |
+          apiVersion: traefik.io/v1alpha1
+          kind: IngressRouteUDP
+          metadata:
+            name: openldap-udp
+            namespace: openldap
+          spec:
+            entryPoints:
+              - ldap-udp
+            routes:
+            - match: HostSNI(`*`)
+              services:
+              - name: openldap
+                port: 1389
+
     - name: 'Wait for the phpldapadmin URL to be reachable'
       ansible.builtin.uri:
         url: "http://phpldapadmin.{{ hostvars['k3s1']['ansible_default_ipv4']['address'] }}.sslip.io"
