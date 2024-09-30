@@ -73,6 +73,7 @@
               objectclass: posixAccount
               objectclass: top
               cn: hgranger
+              gidnumber: 500
               givenName: Hermione
               homedirectory: /home/hgranger
               mail: hgranger@hogwarts.invalid
@@ -88,6 +89,7 @@
               objectclass: posixAccount
               objectclass: top
               cn: rweasley
+              gidnumber: 500
               givenName: Ron
               homedirectory: /home/rweasley
               mail: rweasley@hogwarts.invalid
