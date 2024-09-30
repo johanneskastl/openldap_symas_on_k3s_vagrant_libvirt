@@ -30,6 +30,8 @@
         release_name: 'openldap'
         release_namespace: 'openldap'
         release_values:
+          env:
+            LDAP_SKIP_DEFAULT_TREE: "yes"
           global:
             ldapDomain: "DC=openldap,DC=example,DC=org"
             adminPassword: "dobby"
