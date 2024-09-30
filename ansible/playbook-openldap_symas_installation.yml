@@ -107,19 +107,26 @@
               gidnumber: 500
 
               dn: CN=k8s-cluster-admins,OU=Groups,DC=openldap,DC=example,DC=org
-              objectClass: group
+              objectClass: posixGroup
+              objectclass: top
               cn: k8s-cluster-admins
+              gidnumber: 501
               member: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
 
               dn: CN=group2,OU=Groups,DC=openldap,DC=example,DC=org
-              objectClass: group
+              objectClass: posixGroup
+              objectclass: top
               cn: group2
+              gidnumber: 503
               member: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
 
               dn: CN=k8s-create-ns,OU=Groups,DC=openldap,DC=example,DC=org
-              objectClass: group
+              objectClass: posixGroup
+              objectclass: top
               cn: k8s-create-ns
+              gidnumber: 502
               member: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
+
           ltb-passwd:
             ingress:
               enabled: true
