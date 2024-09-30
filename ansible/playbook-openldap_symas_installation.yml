@@ -53,7 +53,9 @@
               ou: Groups
 
               dn: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
-              objectClass: user
+              objectClass: inetOrgPerson
+              objectclass: posixAccount
+              objectclass: top
               cn: hpotter
               givenName: Harry
               sn: Potter
@@ -64,7 +66,9 @@
               userPassword: dobby
 
               dn: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
-              objectClass: user
+              objectClass: inetOrgPerson
+              objectclass: posixAccount
+              objectclass: top
               cn: hgranger
               givenName: Hermione
               sn: Granger
@@ -75,7 +79,9 @@
               userPassword: dobby
 
               dn: CN=rweasley,OU=Users,DC=openldap,DC=example,DC=org
-              objectClass: user
+              objectClass: inetOrgPerson
+              objectclass: posixAccount
+              objectclass: top
               cn: rweasley
               givenName: Ron
               sn: Weasley
