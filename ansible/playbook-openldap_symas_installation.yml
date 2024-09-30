@@ -34,6 +34,69 @@
             ldapDomain: "DC=openldap,DC=example,DC=org"
             adminPassword: "dobby"
             configPassword: "dobby"
+          customLdifFiles:
+            00-root.ldif: |-
+              dn: DC=openldap,DC=example,DC=org
+              objectclass: dcObject
+              objectclass: organization
+              dc: openldap
+              o: Example, Inc
+            10-data.ldif: |-
+              dn: OU=Users,DC=openldap,DC=example,DC=org
+              objectClass: organizationalUnit
+              ou: users
+
+              dn: OU=Groups,DC=openldap,DC=example,DC=org
+              objectClass: organizationalUnit
+              ou: Groups
+
+              dn: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
+              objectClass: user
+              cn: hpotter
+              givenName: Harry
+              sn: Potter
+              samAccountName: hpotter
+              mail: hpotter@hogwarts.invalid
+              title: Tester
+              telephoneNumber: 123-456-7890
+              userPassword: dobby
+
+              dn: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
+              objectClass: user
+              cn: hgranger
+              givenName: Hermione
+              sn: Granger
+              samAccountName: hgranger
+              mail: hgranger@hogwarts.invalid
+              title: Tester
+              telephoneNumber: 123-456-7890
+              userPassword: dobby
+
+              dn: CN=rweasley,OU=Users,DC=openldap,DC=example,DC=org
+              objectClass: user
+              cn: rweasley
+              givenName: Ron
+              sn: Weasley
+              samAccountName: rweasley
+              mail: rweasley@hogwarts.invalid
+              title: Tester
+              telephoneNumber: 123-456-7890
+              userPassword: dobby
+
+              dn: CN=k8s-cluster-admins,OU=Groups,DC=openldap,DC=example,DC=org
+              objectClass: group
+              cn: k8s-cluster-admins
+              member: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
+
+              dn: CN=group2,OU=Groups,DC=openldap,DC=example,DC=org
+              objectClass: group
+              cn: group2
+              member: CN=hpotter,OU=Users,DC=openldap,DC=example,DC=org
+
+              dn: CN=k8s-create-ns,OU=Groups,DC=openldap,DC=example,DC=org
+              objectClass: group
+              cn: k8s-create-ns
+              member: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
           ltb-passwd:
             ingress:
               enabled: true
