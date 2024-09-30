@@ -100,6 +100,12 @@
               uidnumber: 1002
               userpassword: dobby
 
+              dn: CN=all-users,OU=Groups,DC=openldap,DC=example,DC=org
+              objectClass: posixGroup
+              objectclass: top
+              cn: all-users
+              gidnumber: 500
+
               dn: CN=k8s-cluster-admins,OU=Groups,DC=openldap,DC=example,DC=org
               objectClass: group
               cn: k8s-cluster-admins
