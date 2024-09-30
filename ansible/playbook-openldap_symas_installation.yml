@@ -61,7 +61,6 @@
               givenName: Harry
               homedirectory: /home/hpotter
               mail: hpotter@hogwarts.invalid
-              samAccountName: hpotter
               sn: Potter
               telephoneNumber: 123-456-7890
               title: Tester
@@ -77,7 +76,6 @@
               givenName: Hermione
               homedirectory: /home/hgranger
               mail: hgranger@hogwarts.invalid
-              samAccountName: hgranger
               sn: Granger
               telephoneNumber: 123-456-7890
               title: Tester
@@ -93,7 +91,6 @@
               givenName: Ron
               homedirectory: /home/rweasley
               mail: rweasley@hogwarts.invalid
-              samAccountName: rweasley
               sn: Weasley
               telephoneNumber: 123-456-7890
               title: Tester
