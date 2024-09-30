@@ -58,11 +58,11 @@
               objectclass: top
               cn: hpotter
               givenName: Harry
-              sn: Potter
-              samAccountName: hpotter
               mail: hpotter@hogwarts.invalid
-              title: Tester
+              samAccountName: hpotter
+              sn: Potter
               telephoneNumber: 123-456-7890
+              title: Tester
               userPassword: dobby
 
               dn: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
@@ -71,11 +71,11 @@
               objectclass: top
               cn: hgranger
               givenName: Hermione
-              sn: Granger
-              samAccountName: hgranger
               mail: hgranger@hogwarts.invalid
-              title: Tester
+              samAccountName: hgranger
+              sn: Granger
               telephoneNumber: 123-456-7890
+              title: Tester
               userPassword: dobby
 
               dn: CN=rweasley,OU=Users,DC=openldap,DC=example,DC=org
@@ -84,11 +84,11 @@
               objectclass: top
               cn: rweasley
               givenName: Ron
-              sn: Weasley
-              samAccountName: rweasley
               mail: rweasley@hogwarts.invalid
-              title: Tester
+              samAccountName: rweasley
+              sn: Weasley
               telephoneNumber: 123-456-7890
+              title: Tester
               userPassword: dobby
 
               dn: CN=k8s-cluster-admins,OU=Groups,DC=openldap,DC=example,DC=org
