@@ -57,13 +57,17 @@
               objectclass: posixAccount
               objectclass: top
               cn: hpotter
+              gidnumber: 500
               givenName: Harry
+              homedirectory: /home/hpotter
               mail: hpotter@hogwarts.invalid
               samAccountName: hpotter
               sn: Potter
               telephoneNumber: 123-456-7890
               title: Tester
-              userPassword: dobby
+              uid: hpotter
+              uidnumber: 1000
+              userpassword: dobby
 
               dn: CN=hgranger,OU=Users,DC=openldap,DC=example,DC=org
               objectClass: inetOrgPerson
@@ -71,12 +75,15 @@
               objectclass: top
               cn: hgranger
               givenName: Hermione
+              homedirectory: /home/hgranger
               mail: hgranger@hogwarts.invalid
               samAccountName: hgranger
               sn: Granger
               telephoneNumber: 123-456-7890
               title: Tester
-              userPassword: dobby
+              uid: hgranger
+              uidnumber: 1001
+              userpassword: dobby
 
               dn: CN=rweasley,OU=Users,DC=openldap,DC=example,DC=org
               objectClass: inetOrgPerson
@@ -84,12 +91,15 @@
               objectclass: top
               cn: rweasley
               givenName: Ron
+              homedirectory: /home/rweasley
               mail: rweasley@hogwarts.invalid
               samAccountName: rweasley
               sn: Weasley
               telephoneNumber: 123-456-7890
               title: Tester
-              userPassword: dobby
+              uid: rweasley
+              uidnumber: 1002
+              userpassword: dobby
 
               dn: CN=k8s-cluster-admins,OU=Groups,DC=openldap,DC=example,DC=org
               objectClass: group
