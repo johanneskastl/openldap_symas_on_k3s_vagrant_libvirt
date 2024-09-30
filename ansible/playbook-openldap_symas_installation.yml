@@ -32,8 +32,8 @@
         release_values:
           global:
             ldapDomain: "DC=openldap,DC=example,DC=org"
-            adminPassword: "totallynotsecure"
-            configPassword: "anothertotallyinsecurepassword"
+            adminPassword: "dobby"
+            configPassword: "dobby"
           ltb-passwd:
             ingress:
               enabled: true
