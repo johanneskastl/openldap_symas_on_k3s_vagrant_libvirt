@@ -19,6 +19,77 @@ Please be aware, that this might break the Ansible provisioning.
 1. Run `vagrant up`
 1. Run `kubectl --kubeconfig ansible/k3s-kubeconfig get nodes` and you should
    see your server.
+1. Run `vagrant address` to find out your VM's IP address. If you do not have
+   the address plugin installed, you can log in using `vagrant ssh` and check
+   the IP address by running `ip a s`.
+1. The URLs for both `phpldapadmin` and the [password change
+   utility](https://ltb-project.org/documentation/self-service-password.html)
+   are printed out at the end of the Ansible provisioning.
+1. The LDAP server itself is reachable on the VM's IP, you can test this by
+   running the following command (which needs ldapsearch installed):
+
+   ```
+   ldapsearch -H ldap://192.0.2.13 -W -b dc=openldap,dc=example,dc=org -D cn=admin,dc=openldap,dc=example,dc=org
+   ```
+
+   When asked for the password, use `dobby`. You should get something like the
+   following output:
+
+   ```
+   $ ldapsearch -H ldap://192.0.2.13 -W -D cn=admin,dc=openldap,dc=example,dc=org -b dc=openldap,dc=example,dc=org
+   Enter LDAP Password:
+   # extended LDIF
+   #
+   # LDAPv3
+   # base <dc=openldap,dc=example,dc=org> with scope subtree
+   # filter: (objectclass=*)
+   # requesting: ALL
+   #
+
+   # openldap.example.org
+   dn: dc=openldap,dc=example,dc=org
+   objectClass: dcObject
+   objectClass: organization
+   dc: openldap
+   o: Example, Inc
+
+   # Users, openldap.example.org
+   dn: ou=Users,dc=openldap,dc=example,dc=org
+   objectClass: organizationalUnit
+   ou: users
+
+   # Groups, openldap.example.org
+   dn: ou=Groups,dc=openldap,dc=example,dc=org
+   objectClass: organizationalUnit
+   ou: Groups
+
+   # hpotter, Users, openldap.example.org
+   dn: cn=hpotter,ou=Users,dc=openldap,dc=example,dc=org
+   objectClass: inetOrgPerson
+   objectClass: posixAccount
+   objectClass: top
+   cn: hpotter
+   gidNumber: 500
+   givenName: Harry
+   homeDirectory: /home/hpotter
+   mail: hpotter@hogwarts.invalid
+   sn: Potter
+   telephoneNumber: 123-456-7890
+   title: Tester
+   uid: hpotter
+   uidNumber: 1000
+   userPassword:: ZG9iYnk=
+
+   [...]
+
+   # search result
+   search: 2
+   result: 0 Success
+
+   # numResponses: 11
+   # numEntries: 10
+   ```
+
 1. Party!
 
 ## Cleaning up
